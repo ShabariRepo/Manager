@@ -1,0 +1,7 @@
+{
+    "extends": "rallycoding",
+    "rules": {
+        // get rid of the {} in single method thing like in the index in actions
+        "arrow-body-style": 0
+    }
+}
