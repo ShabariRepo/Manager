@@ -3,7 +3,6 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -15,7 +14,7 @@ import {
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 import reducers from './reducers';
-import LoginForm from './components/LoginForm';
+import Router from './Router';
 
 
 class App extends Component {
@@ -43,10 +42,9 @@ class App extends Component {
     
     return (
       // give the provider tag an instance of the create store from redux
+      // if you put a view it shows blank page
       <Provider store={store}>
-        <View>
-          <LoginForm />
-        </View>
+        <Router />
       </Provider>
     );
   }
