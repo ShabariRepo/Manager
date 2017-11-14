@@ -1,6 +1,6 @@
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { EMPLOYEE_CREATE, EMPLOYEE_UPDATE } from './types';
+import { EMPLOYEE_CREATE, EMPLOYEE_UPDATE, EMPLOYEES_FETCH_SUCCESS } from './types';
 
 export const employeeUpdate = ({ prop, value }) => {
     return {
@@ -28,5 +28,19 @@ export const employeeCreate = ({ name, phone, shift }) => {
                 dispatch({ type: EMPLOYEE_CREATE });
                 Actions.employeeList({ type: 'reset' });
             });
+    };
+};
+
+// async so using redux thunk
+export const employeesFetch = () => {
+    const { currentUser } = firebase.auth();
+
+    return (dispatch) => {
+        // get ref like above and then search the location
+        // snapshot just represents or describes the data in there if value exists
+        firebase.database().ref(`/users/${currentUser.uid}/employees`)
+        .on('value', snapshot => {
+            dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
+        });
     };
 };
